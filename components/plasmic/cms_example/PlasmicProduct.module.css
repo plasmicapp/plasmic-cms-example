@@ -72,3 +72,11 @@
   max-width: 100%;
   position: relative;
 }
+.link {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 800px;
+  margin-top: calc(30px + 16px) !important;
+  min-width: 0;
+}

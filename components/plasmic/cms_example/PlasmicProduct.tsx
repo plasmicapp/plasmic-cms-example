@@ -55,6 +55,7 @@ export const PlasmicProduct__ArgProps = new Array<ArgPropType>();
 export type PlasmicProduct__OverridesType = {
   root?: p.Flex<"div">;
   cmsDataLoader?: p.Flex<typeof CmsQueryRepeater>;
+  link?: p.Flex<"a"> & Partial<LinkProps>;
 };
 
 export interface DefaultProductProps {}
@@ -140,6 +141,22 @@ function PlasmicProduct__RenderFunc(props: {
               </div>
             ) : null}
           </CmsQueryRepeater>
+
+          <p.PlasmicLink
+            data-plasmic-name={"link"}
+            data-plasmic-override={overrides.link}
+            className={classNames(
+              projectcss.all,
+              projectcss.a,
+              projectcss.__wab_text,
+              sty.link
+            )}
+            component={Link}
+            href={"/" as const}
+            platform={"nextjs"}
+          >
+            {"← Go back"}
+          </p.PlasmicLink>
         </p.Stack>
       </div>
     </React.Fragment>
@@ -147,8 +164,9 @@ function PlasmicProduct__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "cmsDataLoader"],
-  cmsDataLoader: ["cmsDataLoader"]
+  root: ["root", "cmsDataLoader", "link"],
+  cmsDataLoader: ["cmsDataLoader"],
+  link: ["link"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<
@@ -157,6 +175,7 @@ type DescendantsType<
 type NodeDefaultElementType = {
   root: "div";
   cmsDataLoader: typeof CmsQueryRepeater;
+  link: "a";
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -215,6 +234,7 @@ export const PlasmicProduct = Object.assign(
   {
     // Helper components rendering sub-elements
     cmsDataLoader: makeNodeComponent("cmsDataLoader"),
+    link: makeNodeComponent("link"),
 
     // Metadata about props expected for PlasmicProduct
     internalVariantProps: PlasmicProduct__VariantProps,
