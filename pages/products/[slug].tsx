@@ -73,6 +73,7 @@ export const getStaticProps: GetStaticProps<
 > = async (context) => {
   const slug = context.params?.slug;
   if (!slug) {
+    throw new Error("Missing slug");
   }
   const products: Product[] = (
     await apiGet(`/tables/products/query`, {
