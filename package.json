@@ -1,5 +1,5 @@
 {
-  "name": "cms-example",
+  "name": "plasmic-cms-example",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,6 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@plasmicapp/cli": "^0.1.174",
+    "@plasmicapp/host": "^1.0.21",
+    "@plasmicapp/react-web": "^0.2.91",
+    "@plasmicpkgs/plasmic-cms": "^0.0.39",
     "next": "12.1.0",
     "react": "17.0.2",
     "react-dom": "17.0.2"

@@ -1,0 +1,74 @@
+.root {
+  flex-direction: column;
+  display: flex;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  min-width: 0;
+  min-height: 0;
+  padding: 96px 24px;
+}
+.root > :global(.__wab_flex-container) {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 0;
+  min-height: 0;
+  margin-top: calc(0px - 16px);
+  height: calc(100% + 16px);
+}
+.root > :global(.__wab_flex-container) > *,
+.root > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.root > :global(.__wab_flex-container) > picture > img,
+.root > :global(.__wab_flex-container) > :global(.__wab_slot) > picture > img {
+  margin-top: 16px;
+}
+.cmsDataLoader:global(.__wab_instance) {
+  max-width: 100%;
+  position: relative;
+}
+.freeBox___7Wfpj {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 800px;
+  min-width: 0;
+}
+.freeBox__zQsx7 {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  margin-bottom: 30px;
+  min-width: 0;
+}
+.cmsEntryField__mGltT:global(.__wab_instance) {
+  max-width: 100%;
+  position: relative;
+  font-weight: 700;
+  font-size: 48px;
+  color: #000000;
+  line-height: 1.1;
+  width: 100%;
+  min-width: 0;
+}
+.cmsEntryField__d30IG:global(.__wab_instance) {
+  max-width: 100%;
+  position: relative;
+  font-size: 20px;
+  font-weight: 700;
+  color: #ff0000;
+}
+.cmsEntryField__fKNsB:global(.__wab_instance) {
+  max-width: 100%;
+  position: relative;
+}
