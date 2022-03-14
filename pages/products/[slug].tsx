@@ -1,6 +1,4 @@
-import { DataProvider } from "@plasmicapp/host";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
-import { NextParsedUrlQuery } from "next/dist/server/request-meta";
 import { ParsedUrlQuery } from "querystring";
 import * as React from "react";
 import GlobalContextsProvider from "../../components/plasmic/cms_example/PlasmicGlobalContextsProvider";
