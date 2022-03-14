@@ -86,9 +86,13 @@ export const getStaticProps: GetStaticProps<
 const Product: NextPage<ProductProps> = ({ product }) => {
   return (
     <GlobalContextsProvider>
-      <DataProvider name={`__plasmic_cms_query_products`} data={[product]}>
-        <PlasmicProduct />
-      </DataProvider>
+      <PlasmicProduct
+        fetcher={{
+          where: {
+            slug: product.data.slug,
+          },
+        }}
+      />
     </GlobalContextsProvider>
   );
 };

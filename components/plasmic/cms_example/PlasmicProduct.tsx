@@ -54,7 +54,7 @@ export const PlasmicProduct__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicProduct__OverridesType = {
   root?: p.Flex<"div">;
-  cmsDataLoader?: p.Flex<typeof CmsQueryRepeater>;
+  fetcher?: p.Flex<typeof CmsQueryRepeater>;
   link?: p.Flex<"a"> & Partial<LinkProps>;
 };
 
@@ -97,9 +97,9 @@ function PlasmicProduct__RenderFunc(props: {
           )}
         >
           <CmsQueryRepeater
-            data-plasmic-name={"cmsDataLoader"}
-            data-plasmic-override={overrides.cmsDataLoader}
-            className={classNames("__wab_instance", sty.cmsDataLoader)}
+            data-plasmic-name={"fetcher"}
+            data-plasmic-override={overrides.fetcher}
+            className={classNames("__wab_instance", sty.fetcher)}
             desc={false}
             limit={1 as const}
             useDraft={false}
@@ -164,8 +164,8 @@ function PlasmicProduct__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "cmsDataLoader", "link"],
-  cmsDataLoader: ["cmsDataLoader"],
+  root: ["root", "fetcher", "link"],
+  fetcher: ["fetcher"],
   link: ["link"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
@@ -174,7 +174,7 @@ type DescendantsType<
 > = typeof PlasmicDescendants[T][number];
 type NodeDefaultElementType = {
   root: "div";
-  cmsDataLoader: typeof CmsQueryRepeater;
+  fetcher: typeof CmsQueryRepeater;
   link: "a";
 };
 
@@ -233,7 +233,7 @@ export const PlasmicProduct = Object.assign(
   makeNodeComponent("root"),
   {
     // Helper components rendering sub-elements
-    cmsDataLoader: makeNodeComponent("cmsDataLoader"),
+    fetcher: makeNodeComponent("fetcher"),
     link: makeNodeComponent("link"),
 
     // Metadata about props expected for PlasmicProduct
