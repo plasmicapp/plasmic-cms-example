@@ -1,8 +1,13 @@
+import * as React from "react";
+import {
+  ComponentRenderData,
+  extractPlasmicQueryData,
+  PlasmicComponent,
+  PlasmicRootProvider,
+} from "@plasmicapp/loader-nextjs";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { ParsedUrlQuery } from "querystring";
-import * as React from "react";
-import GlobalContextsProvider from "../../components/plasmic/cms_example/PlasmicGlobalContextsProvider";
-import { PlasmicProduct } from "../../components/plasmic/cms_example/PlasmicProduct";
+import { PLASMIC } from "../../plasmic-init";
 
 const cmsConfig = {
   host: `https://studio.plasmic.app`,
@@ -46,8 +51,10 @@ interface Product {
   };
 }
 
-interface ProductProps {
-  product: Product;
+interface ProductPageProps {
+  plasmicData: ComponentRenderData;
+  queryCache: Record<string, any>;
+  slug: string;
 }
 
 export const getStaticPaths: GetStaticPaths<ProductParams> = async () => {
@@ -65,34 +72,51 @@ export const getStaticPaths: GetStaticPaths<ProductParams> = async () => {
   };
 };
 
+const pagePath = "/products/[slug]";
+
 export const getStaticProps: GetStaticProps<
-  ProductProps,
+  ProductPageProps,
   ProductParams
 > = async (context) => {
   const slug = context.params?.slug;
   if (!slug) {
     throw new Error("Missing slug");
   }
-  const products: Product[] = (
-    await apiGet(`/tables/products/query`, {
-      q: JSON.stringify({ where: { slug } }),
-    })
-  ).rows;
-  return { props: { product: products[0] } };
-};
 
-const Product: NextPage<ProductProps> = ({ product }) => {
-  return (
-    <GlobalContextsProvider>
-      <PlasmicProduct
-        fetcher={{
-          where: {
-            slug: product.data.slug,
-          },
+  const plasmicData = await PLASMIC.fetchComponentData(pagePath);
+  const queryCache = await extractPlasmicQueryData(
+    <PlasmicRootProvider loader={PLASMIC} prefetchedData={plasmicData}>
+      <PlasmicComponent
+        component={pagePath}
+        componentProps={{
+          fetcher: { where: { slug } },
         }}
       />
-    </GlobalContextsProvider>
+    </PlasmicRootProvider>
+  );
+
+  return { props: { plasmicData, queryCache, slug } };
+};
+
+const ProductPage: NextPage<ProductPageProps> = ({
+  plasmicData,
+  queryCache,
+  slug,
+}) => {
+  return (
+    <PlasmicRootProvider
+      loader={PLASMIC}
+      prefetchedData={plasmicData}
+      prefetchedQueryData={queryCache}
+    >
+      <PlasmicComponent
+        component={pagePath}
+        componentProps={{
+          fetcher: { where: { slug } },
+        }}
+      />
+    </PlasmicRootProvider>
   );
 };
 
-export default Product;
+export default ProductPage;
